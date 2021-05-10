@@ -39,32 +39,23 @@ function appendData(data) {
 	var mainContainer = document.getElementById("srtQueryData");
 	mainContainer.innerHTML = "";
 
+	//PLAYERS HP
 	var hitPercent = (data.CurrentHP / data.MaxHP) * 100;
-	//if (hitPercent > 66) {
-	//	mainContainer.innerHTML += `<font size="4" color="#7cfc00"><div id="currenthp">HP: ${data.CurrentHP}</div></font>`;
-	//}
-	//else if (hitPercent <= 66 && hitPercent > 33) {
-	//	mainContainer.innerHTML += `<font size="4" color="#daa520"><div id="currenthp">HP: ${data.CurrentHP}</div></font>`;
-	//}
-	//else {
-	//	mainContainer.innerHTML += `<font size="4" color="#ff0000"><div id="currenthp">HP: ${data.CurrentHP}</div></font>`;
-	//}
-
 	if (hitPercent > 66) {
 		mainContainer.innerHTML += `<div class="hp"><div class="hpbar fine" style="width:${hitPercent}%">
-				<div id="currenthp">Ethan ${data.CurrentHP}</div><div class="green" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
+				<div id="currenthp">${data.CurrentHP}</div><div class="green" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
 	}
 	else if (hitPercent <= 66 && hitPercent > 33) {
 		mainContainer.innerHTML += `<div class="hp"><div class="hpbar caution" style="width:${hitPercent}%">
-				<div id="currenthp">Ethan ${data.CurrentHP}</div><div class="yellow" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
+				<div id="currenthp">${data.CurrentHP}</div><div class="yellow" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
 	}
 	else if (hitPercent <= 33 && hitPercent > 0){
 		mainContainer.innerHTML += `<div class="hp"><div class="hpbar danger" style="width:${hitPercent}%">
-				<div id="currenthp">Ethan ${data.CurrentHP}</div><div class="red" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
+				<div id="currenthp">${data.CurrentHP}</div><div class="red" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
 	}
 	else {
 		mainContainer.innerHTML += `<div class="hp"><div class="hpbar dead" style="width:${100}%">
-				<div id="currenthp">Ethan ${data.CurrentHP}</div><div class="grey" id="percenthp">${0}%</div></div></div>`;
+				<div id="currenthp">${data.CurrentHP}</div><div class="grey" id="percenthp">${0}%</div></div></div>`;
 	}
 	
 	mainContainer.innerHTML += `<font size="4" color="#fff"><div id="lei">Lei: ${data.CurrentLei}</div></font>`;
@@ -72,4 +63,14 @@ function appendData(data) {
 	mainContainer.innerHTML += `<div id="darank">DA Rank: ${data.CurrentDARank}</div>`;
 
 	mainContainer.innerHTML += `<div id="score">DA Score: ${data.CurrentDAScore}</div>`;
+
+	mainContainer.innerHTML += `<div id="gs">Game State: ${data.GameState}</div>`;
+
+	var cid = (data.CutsceneState != 4294967295) ? true : false;
+
+	mainContainer.innerHTML += `<div id="cs">Cutscene State: ${data.CutsceneState}</div>`;
+
+	mainContainer.innerHTML += `<div id="cs2">Cutscene Playing: ${cid}</div>`;
+
+	mainContainer.innerHTML += `<div id="ps">Paused: ${data.PauseState}</div>`;
 }
