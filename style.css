@@ -26,70 +26,68 @@ body {
 	line-height: 30px;
 }
 
-#lei {
-	position: absolute;
-	top: 60px;
-	left: 10px;
-	padding-right: 10px;
-}
-
-#gs {
-	position: absolute;
-	top: 80px;
-	left: 10px;
-	padding-right: 10px;
-}
-
-#cs {
-	position: absolute;
-	top: 100px;
-	left: 10px;
-	padding-right: 10px;
-}
-
-#cs2 {
-	position: absolute;
-	top: 120px;
-	left: 10px;
-	padding-right: 10px;
-}
-
-#ps {
-	position: absolute;
-	top: 140px;
-	left: 10px;
-	padding-right: 10px;
-}
-
 #darank {
 	position: absolute;
 	font-size: 16px;
-	top: 40px;
+	top: 45px;
 	padding-left: 10px;
 }
 
 #score {
 	position: absolute;
 	font-size: 16px;
-	top: 40px;
+	top: 45px;
 	right: 0px;
 	padding-right: 10px;
 }
 
-#enemy {
+#lei {
 	position: absolute;
-	font-size: 20px;
-	top: 40px;
-	padding-left: 9px;
-	color: red;
-	font-weight: 700;
+	top: 65px;
+	left: 10px;
+	padding-right: 10px;
+}
+
+#gi {
+	position: absolute;
+	top: 85px;
+	left: 10px;
+	padding-right: 10px;
+}
+
+#gs {
+	position: absolute;
+	top: 85px;
+	right: 0px;
+	padding-right: 10px;
+}
+
+#cs {
+	position: absolute;
+	top: 105px;
+	left: 10px;
+	padding-right: 10px;
+}
+
+#cs2 {
+	position: absolute;
+	top: 125px;
+	left: 10px;
+	padding-right: 10px;
+}
+
+#ps {
+	position: absolute;
+	top: 145px;
+	left: 10px;
+	padding-right: 10px;
 }
 
 .hp {
 	position: relative;
 	top: 5px;
 	left: -1px;
-	background: rgba(34, 26, 26, 0);
+	background: rgba(34, 26, 26, 0.6);
 	width: calc(100% - 8px);
 	border: rgba(60, 60, 60, 255) solid 2px;
 	height: 30px;
@@ -124,10 +122,9 @@ body {
 }
 
 #percenthp {
-	position: relative;
-	top: -30px;
-	display: flex;
-	justify-content: flex-end;
+	position: absolute;
+	top: 0px;
+	right: 0px;
 	align-items: center;
 	padding-right: 10px;
 	font-size: 24px;
@@ -136,25 +133,25 @@ body {
 
 .enemyhp {
 	position: relative;
-	top: 62px;
+	top: 135px;
 	left: -1px;
-	background: rgba(0, 0, 0, 0);
-	width: calc(320px - 8px);
+	background: rgba(34, 26, 26, 0.6);
+	width: calc(100% - 8px);
 	border: rgba(60, 60, 60, 255) solid 2px;
 	height: 30px;
 }
 
 .enemyhpbar {
-	background: rgba(100, 0, 0, 255);
 	width: 100%;
-	height: 26px;
+	height: 30px;
 }
 
 #currentenemyhp {
-	font-size: 24px;
-	color: red;
+	display: flex;
+	justify-content: start;
+	align-items: center;
 	padding-left: 10px;
-	font-weight: 700;
+	font-size: 24px;
 	line-height: 30px;
 }
 
@@ -162,10 +159,10 @@ body {
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	font-size: 24px;
-	color: white;
+	align-items: center;
 	padding-right: 10px;
-	font-weight: 700;
+	font-size: 24px;
+	line-height: 30px;
 }
 
 .green {
