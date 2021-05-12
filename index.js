@@ -80,12 +80,26 @@ function appendData(data) {
 		if (data.LadyD.IsAlive)
 		{
 			var ldHitPercent = (data.LadyD.CurrentHP / data.LadyD.MaximumHP) * 100;
-			mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar fine" style="width:${ldHitPercent}%">
-				<div id="currentenemyhp">${data.LadyD.CurrentHP}</div><div class="green" id="percentenemyhp">${ldHitPercent.toFixed(1)}%</div></div></div>`;
+			mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${ldHitPercent}%">
+				<div id="currentenemyhp">Lady Dimitrescu: ${data.LadyD.CurrentHP}</div><div class="red" id="percentenemyhp">${ldHitPercent.toFixed(1)}%</div></div></div>`;
 		}
+		//else {
+		//mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:100%">
+		//		<div id="currentenemyhp">Lady Dimitrescu: 9000</div><div class="red" id="percentenemyhp">100.0%</div></div></div>`;
+		//}
 	}
-	//else {
-	//	mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:100%">
-	//			<div id="currentenemyhp">Lady Dimitrescu: 9000</div><div class="red" id="percentenemyhp">100.0%</div></div></div>`;
-	//}
+
+	if (data.Urias != null) {
+		if (data.Urias.IsAlive)
+		{
+			var uHitPercent = (data.Urias.CurrentHP / data.Urias.MaximumHP) * 100;
+			mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${uHitPercent}%">
+				<div id="currentenemyhp">Urias: ${data.Urias.CurrentHP}</div><div class="red" id="percentenemyhp">${uHitPercent.toFixed(1)}%</div></div></div>`;
+		}
+		//else {
+		//mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:100%">
+		//		<div id="currentenemyhp">Lady Dimitrescu: 9000</div><div class="red" id="percentenemyhp">100.0%</div></div></div>`;
+		//}
+	}
+	
 }
