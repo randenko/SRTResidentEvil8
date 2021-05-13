@@ -35,7 +35,7 @@ function getData() {
 }
 
 function appendData(data) {
-	console.log(data);
+	//console.log(data);
 	var mainContainer = document.getElementById("srtQueryData");
 	mainContainer.innerHTML = "";
 
@@ -76,49 +76,27 @@ function appendData(data) {
 
 	mainContainer.innerHTML += `<div id="ps">Paused: ${data.PauseState}</div>`;
 
-	if (data.Urias.IsAlive)
+	GetBoss(data.Urias[0], "Urias", 25000);
+	GetBoss(data.Sisters, "Bella", 2900);
+	GetBoss(data.Sisters, "Cassandra", 3400);
+	GetBoss(data.Sisters, "Daniella", 3700);
+	GetBoss(data.LadyD, "Lady Dimitrescu", 9000);
+	GetBoss(data.Moreau, "Moreau", 26000);
+	GetBoss(data.Urias[1], "Urias", 25000);
+	//GetBoss(data.Urias[2], "Urias Strǎjer", 75000);
+	//GetBoss(data.Sturm, "Sturm", 15000);
+	//GetBoss(data.Heisenberg, "Heisenberg", 100000);
+	//GetBoss(data.Miranda, "Miranda", 30000);
+	//GetBoss(data.Miranda, "Miranda2", 100000);
+}
+
+function GetBoss(boss, name, max) {
+	let mainContainer = document.getElementById("srtQueryData");
+	if (boss.IsAlive)
 	{
-		if (data.Urias.MaximumHP < 25000) { return; }
-		let uHitPercent = (data.Urias.CurrentHP / data.Urias.MaximumHP) * 100;
-		mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${uHitPercent}%">
-			<div id="currentenemyhp">Urias: ${data.Urias.CurrentHP}</div><div class="red" id="percentenemyhp">${uHitPercent.toFixed(1)}%</div></div></div>`;
+		if (boss.MaximumHP != max) { return; }
+		let _HitPercent = (boss.CurrentHP / boss.MaximumHP) * 100;
+		mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${_HitPercent}%">
+			<div id="currentenemyhp">${name}: ${boss.CurrentHP}</div><div class="red" id="percentenemyhp">${_HitPercent.toFixed(1)}%</div></div></div>`;
 	}
-	//else {
-	//mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:100%">
-	//		<div id="currentenemyhp">Urias: 25000</div><div class="red" id="percentenemyhp">100.0%</div></div></div>`;
-	//}
-	if (data.Sisters.IsAlive)
-	{
-		if (data.Sisters.MaximumHP < 2900) { return; }
-		let bHitPercent = (data.Sisters.CurrentHP / data.Sisters.MaximumHP) * 100;
-		mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${bHitPercent}%">
-			<div id="currentenemyhp">D Sister: ${data.Sisters.CurrentHP}</div><div class="red" id="percentenemyhp">${bHitPercent.toFixed(1)}%</div></div></div>`;
-	}
-	//else {
-	//mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:100%">
-	//		<div id="currentenemyhp">Bella: 2900</div><div class="red" id="percentenemyhp">100.0%</div></div></div>`;
-	//}
-	if (data.LadyD.IsAlive)
-	{
-		if (data.LadyD.MaximumHP < 9000) { return; }
-		let ldHitPercent = (data.LadyD.CurrentHP / data.LadyD.MaximumHP) * 100;
-		mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${ldHitPercent}%">
-			<div id="currentenemyhp">Lady Dimitrescu: ${data.LadyD.CurrentHP}</div><div class="red" id="percentenemyhp">${ldHitPercent.toFixed(1)}%</div></div></div>`;
-	}
-	//else {
-	//mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:100%">
-	//		<div id="currentenemyhp">Lady Dimitrescu: 9000</div><div class="red" id="percentenemyhp">100.0%</div></div></div>`;
-	//}
-	if (data.Moreau.IsAlive)
-	{
-		if (data.Moreau.MaximumHP < 26000) { return; }
-		let mHitPercent = (data.Moreau.CurrentHP / data.Moreau.MaximumHP) * 100;
-		mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${mHitPercent}%">
-			<div id="currentenemyhp">Moreau: ${data.Moreau.CurrentHP}</div><div class="red" id="percentenemyhp">${mHitPercent.toFixed(1)}%</div></div></div>`;
-	}
-	//else {
-	//mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:100%">
-	//		<div id="currentenemyhp">Lady Dimitrescu: 9000</div><div class="red" id="percentenemyhp">100.0%</div></div></div>`;
-	//}
-	
 }
