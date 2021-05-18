@@ -26,57 +26,64 @@ body {
 	line-height: 30px;
 }
 
-#position {
+#chapter {
 	position: absolute;
 	font-size: 16px;
 	top: 45px;
 	padding-left: 10px;
 }
 
-#da {
+#position {
 	position: absolute;
 	font-size: 16px;
 	top: 65px;
 	padding-left: 10px;
 }
 
-#lei {
+#da {
 	position: absolute;
+	font-size: 16px;
 	top: 85px;
 	padding-left: 10px;
 }
 
-#gi {
+#lei {
 	position: absolute;
 	top: 105px;
-	left: 0px;
 	padding-left: 10px;
 }
 
-#gs {
+#gi {
 	position: absolute;
 	top: 125px;
 	left: 0px;
 	padding-left: 10px;
 }
 
-#cs {
+#gs {
 	position: absolute;
 	top: 145px;
+	left: 0px;
+	padding-left: 10px;
+}
+
+#cs {
+	position: absolute;
+	top: 165px;
 	left: 10px;
 	padding-right: 10px;
 }
 
 #cs2 {
 	position: absolute;
-	top: 145px;
+	top: 165px;
 	left: 10px;
 	padding-right: 10px;
 }
 
 #ps {
 	position: absolute;
-	top: 165px;
+	top: 185px;
 	left: 10px;
 	padding-right: 10px;
 }
@@ -131,7 +138,7 @@ body {
 
 .enemyhp {
 	position: relative;
-	top: 155px;
+	top: 175px;
 	left: -1px;
 	background: rgba(34, 26, 26, 0.6);
 	width: calc(100% - 8px);

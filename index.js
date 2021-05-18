@@ -112,11 +112,13 @@ function appendData(data) {
 	//PLAYERS HP
 	GetPlayerHP(data);
 	
-	mainContainer.innerHTML += `<font size="4" color="#fff"><div id="lei">Lei: <font size="4" color="#00FF00">${data.Lei}</font></div></font>`;
+	mainContainer.innerHTML += `<div id="chapter">Current Chapter: <font size="4" color="#00FF00">${data.CurrentChapter}</font></div>`;
 	
 	mainContainer.innerHTML += `<div id="position">X: <font size="4" color="#00FF00">${data.PlayerPositionX.toFixed(3)}</font>- Y: <font size="4" color="#00FF00">${data.PlayerPositionY.toFixed(3)}</font> - Z: <font size="4" color="#00FF00">${data.PlayerPositionZ.toFixed(3)}</font></div>`;
 
 	mainContainer.innerHTML += `<div id="da">DA Rank: <font size="4" color="#00FF00">${data.Rank}</font> DA Score: <font size="4" color="#00FF00">${data.RankScore}</font></div>`;
+
+	mainContainer.innerHTML += `<div id="lei">Lei: <font size="4" color="#00FF00">${data.Lei}</font></div>`;
 
 	GetGameInit(data);
 
