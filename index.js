@@ -35,17 +35,13 @@ function getData() {
 }
 
 function GetGameInit(data) {
-	switch (data.GameInit)
+	let mainContainer = document.getElementById("srtQueryData");
+	if (data.CurrentView.includes("Chapter"))
 	{
-		case 1:
-			return "None";
-		case 2:
-			return "Running";
-		case 4:
-			return "PlayerPaused";
-		default:
-			return data.GameInit;
+		mainContainer.innerHTML += `<div id="gi">Game Init: <font size="4" color="#00FF00">True</font></div>`;
+		return;
 	}
+	mainContainer.innerHTML += `<div id="gi">Game Init: <font size="4" color="#FF0000">False</font></div>`;
 }
 
 function GetGameState(data) {
@@ -68,14 +64,28 @@ function GetGameState(data) {
 	}
 }
 
-function appendData(data) {
-	//console.log(data);
-	var mainContainer = document.getElementById("srtQueryData");
-	mainContainer.innerHTML = "";
-	if (data.GameState == 64) {
-		ClearBosses();
+function IsCutscene(data) {
+	let mainContainer = document.getElementById("srtQueryData");
+	if (data.CutsceneState != 4294967295 || data.CutsceneID != 4294967295)
+	{
+		mainContainer.innerHTML += `<div id="cs2">Cutscene Playing: <font size="4" color="#00FF00">True</font></div>`;
+		return;
 	}
-	//PLAYERS HP
+	mainContainer.innerHTML += `<div id="cs2">Cutscene Playing: <font size="4" color="##FF0000">False</font></div>`;
+}
+
+function IsPaused(data) {
+	let mainContainer = document.getElementById("srtQueryData");
+	if (data.PauseState == 1)
+	{
+		mainContainer.innerHTML += `<div id="ps">Is Paused: <font size="4" color="#00FF00">True</font></div>`;
+		return;
+	}
+	mainContainer.innerHTML += `<div id="ps">Is Paused: <font size="4" color="#FF0000">False</font></div>`;
+}
+
+function GetPlayerHP(data) {
+	let mainContainer = document.getElementById("srtQueryData");
 	var hitPercent = (data.PlayerCurrentHealth / data.PlayerMaxHealth) * 100;
 	if (hitPercent > 66) {
 		mainContainer.innerHTML += `<div class="hp"><div class="hpbar fine" style="width:${hitPercent}%">
@@ -93,26 +103,27 @@ function appendData(data) {
 		mainContainer.innerHTML += `<div class="hp"><div class="hpbar dead" style="width:${100}%">
 				<div id="currenthp">${data.PlayerCurrentHealth}</div><div class="grey" id="percenthp">${0}%</div></div></div>`;
 	}
+}
+
+function appendData(data) {
+	//console.log(data);
+	var mainContainer = document.getElementById("srtQueryData");
+	mainContainer.innerHTML = "";
+	//PLAYERS HP
+	GetPlayerHP(data);
 	
-	mainContainer.innerHTML += `<font size="4" color="#fff"><div id="lei">Lei: ${data.Lei}</div></font>`;
+	mainContainer.innerHTML += `<font size="4" color="#fff"><div id="lei">Lei: <font size="4" color="#00FF00">${data.Lei}</font></div></font>`;
 	
-	mainContainer.innerHTML += `<div id="darank">DA Rank: ${data.Rank}</div>`;
+	mainContainer.innerHTML += `<div id="position">X: <font size="4" color="#00FF00">${data.PlayerPositionX.toFixed(3)}</font>- Y: <font size="4" color="#00FF00">${data.PlayerPositionY.toFixed(3)}</font> - Z: <font size="4" color="#00FF00">${data.PlayerPositionZ.toFixed(3)}</font></div>`;
 
-	mainContainer.innerHTML += `<div id="score">DA Score: ${data.RankScore}</div>`;
+	mainContainer.innerHTML += `<div id="da">DA Rank: <font size="4" color="#00FF00">${data.Rank}</font> DA Score: <font size="4" color="#00FF00">${data.RankScore}</font></div>`;
 
-	mainContainer.innerHTML += `<div id="gi">Game Init: ${GetGameInit(data)}</div>`;
+	GetGameInit(data);
 
-	mainContainer.innerHTML += `<div id="gs">Game State: ${GetGameState(data)}</div>`;
+	mainContainer.innerHTML += `<div id="gs">Game State: <font size="4" color="#00FF00">${GetGameState(data)}</font></div>`;
 
-	var cid = (data.CutsceneState != 4294967295 || data.CutsceneID != 4294967295) ? true : false;
-
-	//mainContainer.innerHTML += `<div id="cs">Cutscene State: ${data.CutsceneState} | ${data.CutsceneID}</div>`;
-
-	mainContainer.innerHTML += `<div id="cs2">Cutscene Playing: ${cid}</div>`;
-
-	var pstate = (data.PauseState == 1) ? true : false;
-
-	mainContainer.innerHTML += `<div id="ps">Is Paused: ${pstate}</div>`;
+	IsCutscene(data);	
+	IsPaused(data);
 
 	//var table = document.createElement("table");
 	var filterdEnemies = data.EnemyHealth.filter(m => { return m.IsAlive });
