@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500&display=swap');
 body {
 	background-color: #000000;
 	color: #ffffff;
-	font-family: "Courier Prime", monospace;
+	font-size: 16px;
+	font-family: "Teko", monospace;
+	text-transform: uppercase;
 	font-weight: 700;
 }
 
@@ -17,6 +19,14 @@ body {
 	height: 100%;
 }
 
+.title {
+	padding-right: 10px;
+}
+
+font {
+	padding-right: 10px;
+}
+
 #currenthp {
 	display: flex;
 	justify-content: start;
@@ -26,44 +36,51 @@ body {
 	line-height: 30px;
 }
 
-#chapter {
-	position: absolute;
-	font-size: 16px;
-	top: 45px;
-	padding-left: 10px;
-}
-
 #position {
-	position: absolute;
-	font-size: 16px;
-	top: 65px;
-	padding-left: 10px;
+	position: relative;
+	top: 8px;
+	font-size: 20px;
+	display: flex;
+	justify-content: space-evenly;
 }
 
 #da {
-	position: absolute;
-	font-size: 16px;
-	top: 85px;
+	position: relative;
+	top: 15px;
+	display: flex;
+	justify-content: start;
+	padding-left: 10px;
+}
+
+#chapter {
+	position: relative;
+	top: 15px;
+	display: flex;
+	justify-content: start;
+	padding-left: 10px;
+}
+
+#room {
+	position: relative;
+	top: 15px;
+	display: flex;
+	justify-content: start;
 	padding-left: 10px;
 }
 
 #lei {
-	position: absolute;
-	top: 105px;
-	padding-left: 10px;
-}
-
-#gi {
-	position: absolute;
-	top: 125px;
-	left: 0px;
+	position: relative;
+	top: 15px;
+	display: flex;
+	justify-content: start;
 	padding-left: 10px;
 }
 
 #gs {
-	position: absolute;
-	top: 145px;
-	left: 0px;
+	position: relative;
+	top: 15px;
+	display: flex;
+	justify-content: start;
 	padding-left: 10px;
 }
 
@@ -71,26 +88,28 @@ body {
 	position: absolute;
 	top: 165px;
 	left: 10px;
-	padding-right: 10px;
+	padding-left: 10px;
 }
 
 #cs2 {
-	position: absolute;
-	top: 165px;
-	left: 10px;
-	padding-right: 10px;
+	position: relative;
+	top: 15px;
+	display: flex;
+	justify-content: start;
+	padding-left: 10px;
 }
 
 #ps {
-	position: absolute;
-	top: 185px;
-	left: 10px;
-	padding-right: 10px;
+	position: relative;
+	top: 15px;
+	display: flex;
+	justify-content: start;
+	padding-left: 10px;
 }
 
 .hp {
 	position: relative;
-	top: 5px;
+	top: 10px;
 	left: -1px;
 	background: rgba(34, 26, 26, 0.6);
 	width: calc(100% - 8px);
@@ -138,7 +157,7 @@ body {
 
 .enemyhp {
 	position: relative;
-	top: 175px;
+	top: 15px;
 	left: -1px;
 	background: rgba(34, 26, 26, 0.6);
 	width: calc(100% - 8px);
