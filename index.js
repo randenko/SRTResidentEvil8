@@ -60,10 +60,6 @@ function GetCurrentEvent(data) {
 	let mainContainer = document.getElementById("srtQueryData");
 	if (data.CurrentEvent == undefined)
 	{
-		mainContainer.innerHTML += `
-		<div id="chapter">
-			<div class="title">SRTUpdate: </div><font color="#FF0000">New Update Available</font>
-		</div>`;
 		return;
 	}
 	if (data.CurrentEvent == "")
@@ -71,14 +67,6 @@ function GetCurrentEvent(data) {
 		mainContainer.innerHTML += `
 		<div id="chapter">
 			<div class="title">Current Event: </div><font color="#FF0000">Null</font>
-		</div>`;
-		return;
-	}
-	if (data.CurrentEvent == "None")
-	{
-		mainContainer.innerHTML += `
-		<div id="chapter">
-			<div class="title">Current Event: </div><font color="#00FF00">None</font>
 		</div>`;
 		return;
 	}
@@ -92,6 +80,11 @@ function appendData(data) {
 	//console.log(data);
 	var mainContainer = document.getElementById("srtQueryData");
 	mainContainer.innerHTML = "";
+
+	if (data.VersionInfo == undefined || data.VersionInfo != "1.0.1.4") {
+		mainContainer.innerHTML = `<font color="#FF0000">Outdated Version Please Update</font>`;
+		return;
+	}
 
 	mainContainer.innerHTML += `
 	<div id="position">
