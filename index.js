@@ -1,6 +1,6 @@
 const JSON_ADDRESS = "127.0.0.1";
 const JSON_PORT = 7190;
-const POLLING_RATE = 1000;
+const POLLING_RATE = 333;
 
 const JSON_ENDPOINT = `http://${JSON_ADDRESS}:${JSON_PORT}/`;
 
@@ -34,114 +34,57 @@ function getData() {
 		});
 }
 
-function GetGameInit(data) {
-	let mainContainer = document.getElementById("srtQueryData");
-	if (data.CurrentView.includes("Chapter"))
-	{
-		mainContainer.innerHTML += `<div id="gi">Game Init: <font color="#00FF00">True</font></div>`;
-		return;
-	}
-	mainContainer.innerHTML += `<div id="gi">Game Init: <font color="#FF0000">False</font></div>`;
-}
-
-function GetGameState(data) {
-	switch (data.GameState)
-	{
-		case 0:
-			return "Default";
-		case 1:
-			return "Paused";
-		case 2:
-			return "Loading";
-		case 3:
-			return "Loading";
-		case 32:
-			return "Inventory / Map";
-		case 64:
-			return "Village Of Shadows";
-		case 65:
-			return "Village Of Shadows Paused";
-		default:
-			return data.GameState;
-	}
-}
-
-function IsCutscene(data) {
-	let mainContainer = document.getElementById("srtQueryData");
-	if (data.CutsceneTimer != 0)
-	{
-		mainContainer.innerHTML += `
-		<div id="cs2">
-			<div class="title">Cutscene Playing: </div><font color="#00FF00">True</font>
-		</div>`;
-		return;
-	}
-	mainContainer.innerHTML += `
-	<div id="cs2">
-		<div class="title">Cutscene Playing: </div><font color="##FF0000">False</font>
-	</div>`;
-}
-
-function IsPaused(data) {
-	let mainContainer = document.getElementById("srtQueryData");
-	if (data.PauseState == 1)
-	{
-		mainContainer.innerHTML += `<div id="ps">Is Paused: <font color="#00FF00">True</font></div>`;
-		return;
-	}
-	mainContainer.innerHTML += `<div id="ps">Is Paused: <font color="#FF0000">False</font></div>`;
-}
-
 function GetPlayerHP(data) {
 	let mainContainer = document.getElementById("srtQueryData");
 	var hitPercent = (data.PlayerCurrentHealth / data.PlayerMaxHealth) * 100;
+	var playerName = (data.PlayerStatus.IsEthan) ? "Ethan: " : (data.PlayerStatus.IsEthan) ? "Chris: " : "";
 	if (hitPercent > 66) {
 		mainContainer.innerHTML += `<div class="hp"><div class="hpbar fine" style="width:${hitPercent}%">
-				<div id="currenthp">${data.PlayerCurrentHealth}</div><div class="green" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
+				<div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div><div class="green" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
 	}
 	else if (hitPercent <= 66 && hitPercent > 33) {
 		mainContainer.innerHTML += `<div class="hp"><div class="hpbar caution" style="width:${hitPercent}%">
-				<div id="currenthp">${data.PlayerCurrentHealth}</div><div class="yellow" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
+				<div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div><div class="yellow" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
 	}
 	else if (hitPercent <= 33 && hitPercent > 0){
 		mainContainer.innerHTML += `<div class="hp"><div class="hpbar danger" style="width:${hitPercent}%">
-				<div id="currenthp">${data.PlayerCurrentHealth}</div><div class="red" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
+				<div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div><div class="red" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
 	}
 	else {
 		mainContainer.innerHTML += `<div class="hp"><div class="hpbar dead" style="width:${100}%">
-				<div id="currenthp">${data.PlayerCurrentHealth}</div><div class="grey" id="percenthp">${0}%</div></div></div>`;
+				<div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div><div class="grey" id="percenthp">${0}%</div></div></div>`;
 	}
 }
 
-function GetCurrentChapter(data) {
+function GetCurrentEvent(data) {
 	let mainContainer = document.getElementById("srtQueryData");
-	if (data.CurrentChapter == "")
+	if (data.CurrentEvent == undefined)
 	{
 		mainContainer.innerHTML += `
 		<div id="chapter">
-			<div class="title">Current Chapter: </div><font color="#FF0000">None</font>
+			<div class="title">SRTUpdate: </div><font color="#FF0000">New Update Available</font>
+		</div>`;
+		return;
+	}
+	if (data.CurrentEvent == "")
+	{
+		mainContainer.innerHTML += `
+		<div id="chapter">
+			<div class="title">Current Event: </div><font color="#FF0000">Null</font>
+		</div>`;
+		return;
+	}
+	if (data.CurrentEvent == "None")
+	{
+		mainContainer.innerHTML += `
+		<div id="chapter">
+			<div class="title">Current Event: </div><font color="#00FF00">None</font>
 		</div>`;
 		return;
 	}
 	mainContainer.innerHTML += `
 	<div id="chapter">
-		<div class="title">Current Chapter: </div><font color="#00FF00">${data.CurrentChapter}</font>
-	</div>`;
-}
-
-function GetCurrentRoom(data) {
-	let mainContainer = document.getElementById("srtQueryData");
-	if (data.CurrentRoom == "")
-	{
-		mainContainer.innerHTML += `
-		<div id="room">
-			<div class="title">Current Room: </div><font color="#FF0000">None</font>
-		</div>`;
-		return;
-	}
-	mainContainer.innerHTML += `
-	<div id="room">
-		<div class="title">Current Room: </div><font color="#00FF00">${data.CurrentRoom.split('\0')[0]}</font>
+		<div class="title">Current Event: </div><font color="#00FF00">${data.CurrentEvent}</font>
 	</div>`;
 }
 
@@ -156,32 +99,15 @@ function appendData(data) {
 		Y: <font color="#00FF00">${data.PlayerPositionY.toFixed(3)}</font>
 		Z: <font color="#00FF00">${data.PlayerPositionZ.toFixed(3)}</font>
 	</div>`;
-
 	//PLAYERS HP
 	GetPlayerHP(data);
-
 	mainContainer.innerHTML += `
 	<div id="da">
 		<div class="title">DA Score: </div><font color="#00FF00">${data.RankScore}</font> 
 		<div class="title">DA Rank: </div><font color="#00FF00">${data.Rank}</font>
-	</div>`;
-
-	GetCurrentChapter(data);
-
-	GetCurrentRoom(data);
-
-	mainContainer.innerHTML += `
-	<div id="gs">
-		<div class="title">Game State: </div><font color="#00FF00">${GetGameState(data)}</font>
-	</div>`;
-
-	IsCutscene(data);	
-
-	mainContainer.innerHTML += `
-	<div id="lei">
 		<div class="title">Lei: </div><font color="#00FF00">${data.Lei}</font>
 	</div>`;
-
+	GetCurrentEvent(data);
 	//var table = document.createElement("table");
 	var filterdEnemies = data.EnemyHealth.filter(m => { return (m.IsAlive) });
 	//console.log("Filtered Enemies", filterdEnemies);
@@ -193,5 +119,6 @@ function appendData(data) {
 			<div id="currentenemyhp">${item.CurrentHP}</div><div class="red" id="percentenemyhp">${(item.Percentage * 100).toFixed(1)}%</div></div></div>`;
 		}
 	});
+	
 	//mainContainer.appendChild(table);
 }
