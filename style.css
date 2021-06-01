@@ -53,7 +53,7 @@ font {
 	padding-left: 10px;
 }
 
-#chapter {
+#debug {
 	position: relative;
 	top: 15px;
 	font-size: 20px;
@@ -62,9 +62,10 @@ font {
 	padding-left: 10px;
 }
 
-#room {
+#chapter {
 	position: relative;
 	top: 15px;
+	font-size: 20px;
 	display: flex;
 	justify-content: start;
 	padding-left: 10px;
@@ -175,7 +176,6 @@ font {
 
 #currentenemyhp {
 	position: absolute;
-	width: 420px;
 	top: 0px;
 	left: 0px;
 	padding-left: 10px;
