@@ -81,7 +81,7 @@ function appendData(data) {
 	var mainContainer = document.getElementById("srtQueryData");
 	mainContainer.innerHTML = "";
 
-	if (data.VersionInfo == undefined || data.VersionInfo != "1.0.1.4") {
+	if (data.VersionInfo == undefined || data.VersionInfo != "1.0.1.5") {
 		mainContainer.innerHTML = `<font color="#FF0000">Outdated Version Please Update</font>`;
 		return;
 	}
@@ -100,7 +100,7 @@ function appendData(data) {
 		<div class="title">DA Rank: </div><font color="#00FF00">${data.Rank}</font>
 		<div class="title">Lei: </div><font color="#00FF00">${data.Lei}</font>
 	</div>`;
-	GetCurrentEvent(data);
+	//GetCurrentEvent(data);
 	//var table = document.createElement("table");
 	var filterdEnemies = data.EnemyHealth.filter(m => { return (m.IsAlive) });
 	//console.log("Filtered Enemies", filterdEnemies);
