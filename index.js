@@ -36,7 +36,8 @@ window.onload = function () {
 	const ip = urlParams.get('ip');
 	if (ip != null) {
 		JSON_ADDRESS = ip;
-		JSON_ENDPOINT = `http://${JSON_ADDRESS}:${JSON_PORT}/`;
+		console.log(ip);
+		JSON_ENDPOINT = `https://${JSON_ADDRESS}:${JSON_PORT}/`;
 	}
 	getData();
 	setInterval(getData, POLLING_RATE);
