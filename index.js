@@ -33,6 +33,11 @@ window.onload = function () {
 	if (debug != null) {
 		HideDebug = true;
 	}
+	const ip = urlParams.get('ip');
+	if (ip != null) {
+		JSON_ADDRESS = ip;
+		JSON_ENDPOINT = `http://${JSON_ADDRESS}:${JSON_PORT}/`;
+	}
 	getData();
 	setInterval(getData, POLLING_RATE);
 };
