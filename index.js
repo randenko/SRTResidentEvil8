@@ -236,7 +236,7 @@ function appendData(data) {
 	var mainContainer = document.getElementById("srtQueryData");
 	mainContainer.innerHTML = "";
 
-	if (data.VersionInfo == undefined || data.VersionInfo != "1.0.1.5") {
+	if (data.VersionInfo == undefined || data.VersionInfo != "1.0.1.5" && data.VersionInfo != "1.0.1.6") {
 		mainContainer.innerHTML = `<font color="#FF0000">Outdated Version Please Update</font>`;
 		return;
 	}
