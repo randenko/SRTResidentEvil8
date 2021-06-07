@@ -120,5 +120,12 @@
       }
     }
   },
+  "schematics": {
+    "@schematics/angular": {
+      "component": {
+        "spec": false
+      }
+    }
+  },
   "defaultProject": "SRTResidentEvil8"
 }
