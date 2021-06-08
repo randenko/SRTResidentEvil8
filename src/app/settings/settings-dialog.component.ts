@@ -26,10 +26,10 @@ export class SettingsDialogComponent implements OnInit {
     const settings = new Settings(form.showCurrentEvent, form.showPlayerPosition, form.showStatistics, form.showEnemyHPBar,
       form.showDebugging, form.pollingRate, form.srtHostAddress, form.srtHostPort);
     this.settingsService.setSettings(settings);
-    this.close();
+    this.closeDialog();
   }
 
-  close(): void {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 

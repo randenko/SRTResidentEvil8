@@ -12,8 +12,9 @@ export class AppComponent {
 
   constructor(private dialog: MatDialog) {}
 
-  openDialog() {
+  openSettingsDialog() {
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '350px';
     dialogConfig.autoFocus = true;
     dialogConfig.position = {
       'top': '64px',
