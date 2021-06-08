@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 import {Settings} from "./settings.model";
 import {SettingsService} from "./settings.service";
-import {MatDialogRef} from "@angular/material/dialog";
+
 
 @Component({
   selector: 'app-settings',
@@ -14,7 +15,7 @@ export class SettingsDialogComponent implements OnInit {
   settingsForm: FormGroup;
 
   constructor(private settingsService: SettingsService, private fb: FormBuilder,
-              private dialogRef: MatDialogRef<SettingsDialogComponent>) {
+              private dialogRef: MatDialogRef<SettingsDialogComponent>, @Inject(MAT_DIALOG_DATA) private currentSettings) {
   }
 
   ngOnInit(): void {
@@ -34,16 +35,15 @@ export class SettingsDialogComponent implements OnInit {
   }
 
   private initForm() {
-    const currentSettings: Settings = this.settingsService.getSettings();
     this.settingsForm = this.fb.group({
-      'showCurrentEvent': [currentSettings.showCurrentEvent],
-      'showPlayerPosition': [currentSettings.showPlayerPosition],
-      'showStatistics': [currentSettings.showStatistics],
-      'showEnemyHPBar': [currentSettings.showEnemyHPBar],
-      'showDebugging': [currentSettings.showDebugging],
-      'pollingRate': [currentSettings.pollingRate],
-      'srtHostAddress': [currentSettings.srtHostAddress],
-      'srtHostPort': [currentSettings.srtHostPort]
+      'showCurrentEvent': [this.currentSettings.showCurrentEvent],
+      'showPlayerPosition': [this.currentSettings.showPlayerPosition],
+      'showStatistics': [this.currentSettings.showStatistics],
+      'showEnemyHPBar': [this.currentSettings.showEnemyHPBar],
+      'showDebugging': [this.currentSettings.showDebugging],
+      'pollingRate': [this.currentSettings.pollingRate],
+      'srtHostAddress': [this.currentSettings.srtHostAddress],
+      'srtHostPort': [this.currentSettings.srtHostPort]
     });
   }
 

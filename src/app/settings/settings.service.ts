@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 
 import {Settings} from "./settings.model";
 import {LocalStorageService} from "../local-storage.service";
@@ -13,14 +13,11 @@ export class SettingsService {
     true, 500, "localhost", 7190);
   private currentSettings: Settings;
 
-  settingsSubject = new Subject<Settings>();
+  settingsSubject: Subject<Settings>;
 
   constructor(private localStorage: LocalStorageService) {
     this.init();
-  }
-
-  getSettings(): Settings {
-    return this.currentSettings;
+    this.settingsSubject = new BehaviorSubject(this.currentSettings);
   }
 
   setSettings(settings: Settings): void {
@@ -30,7 +27,7 @@ export class SettingsService {
   }
 
   private init(): void {
-    const settings = this.localStorage.get("srtUISettings");
+    const settings: Settings = this.localStorage.get("srtUISettings");
     if (settings) {
       this.currentSettings = settings;
     } else {

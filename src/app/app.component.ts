@@ -1,19 +1,38 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+
+import {Subscription} from "rxjs";
+
 import {SettingsDialogComponent} from "./settings/settings-dialog.component";
+import {SettingsService} from "./settings/settings.service";
+import {Settings} from "./settings/settings.model";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'RE 8 Village SRT UI';
+  currentSettings: Settings;
+  settingsSubscription: Subscription;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private settingsService: SettingsService) {
+  }
+
+  ngOnInit(): void {
+    this.settingsSubscription = this.settingsService.settingsSubject.subscribe({
+      next: value => this.currentSettings = value
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.settingsSubscription.unsubscribe();
+  }
 
   openSettingsDialog() {
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = this.currentSettings;
     dialogConfig.width = '350px';
     dialogConfig.autoFocus = true;
     dialogConfig.position = {
