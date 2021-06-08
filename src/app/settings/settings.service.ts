@@ -9,9 +9,8 @@ import {LocalStorageService} from "../local-storage.service";
   providedIn: 'root'
 })
 export class SettingsService {
-  private defaultSettings: Settings = new Settings(true, false, true, true,
-    false, 500, "localhost", 7190);
-  settingsSubject: Subject<Settings>;
+  private defaultSettings: Settings = new Settings(true, false, true, true, false, 500, "localhost", 7190);
+  settingsChanged: Subject<Settings>;
 
   constructor(private localStorage: LocalStorageService) {
     this.init();
@@ -19,12 +18,12 @@ export class SettingsService {
 
   setSettings(settings: Settings): void {
     this.localStorage.set("srtUISettings", settings);
-    this.settingsSubject.next(settings);
+    this.settingsChanged.next(settings);
   }
 
   private init(): void {
     const settings: Settings = this.localStorage.get("srtUISettings") || this.defaultSettings;
-    this.settingsSubject = new BehaviorSubject(settings);
+    this.settingsChanged = new BehaviorSubject(settings);
   }
 
 }

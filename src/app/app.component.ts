@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.settingsSubscription = this.settingsService.settingsSubject.subscribe({
+    this.settingsSubscription = this.settingsService.settingsChanged.subscribe({
       next: value => this.currentSettings = value
     });
   }
@@ -35,6 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
     dialogConfig.data = this.currentSettings;
     dialogConfig.width = '350px';
     dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
     dialogConfig.position = {
       'top': '64px',
       right: '0'

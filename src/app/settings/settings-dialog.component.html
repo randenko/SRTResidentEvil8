@@ -5,23 +5,52 @@
   <p><mat-slide-toggle formControlName="showStatistics">Show Statistics</mat-slide-toggle></p>
   <p><mat-slide-toggle formControlName="showEnemyHPBar">Show Enemy HP Bar</mat-slide-toggle></p>
   <p><mat-slide-toggle formControlName="showDebugging">Show Debugging</mat-slide-toggle></p>
-
+  <br>
   <mat-form-field>
     <mat-label>Polling Rate</mat-label>
-    <input matInput formControlName="pollingRate" />
+    <input matInput formControlName="pollingRate" autocomplete="off" />
+    <mat-hint>in milliseconds (one second is 1,000 milliseconds)</mat-hint>
+    <mat-error
+      *ngIf="settingsForm.get('pollingRate').hasError('pattern')">
+      Polling Rate must be a <strong>number</strong>
+    </mat-error>
+    <mat-error
+      *ngIf="settingsForm.get('pollingRate').hasError('min')">
+      Polling Rate must be greater than <strong>250 milliseconds</strong>
+    </mat-error>
+    <mat-error
+      *ngIf="settingsForm.get('pollingRate').hasError('required')">
+      Polling Rate is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
-
+  <br>
   <mat-form-field>
     <mat-label>SRT Host Address</mat-label>
-    <input matInput formControlName="srtHostAddress" />
+    <input matInput formControlName="srtHostAddress" autocomplete="off" />
+    <mat-hint>ip address or domain name</mat-hint>
+    <mat-error
+      *ngIf="settingsForm.get('srtHostAddress').hasError('required')">
+      SRT Host Address is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
-
+  <br>
   <mat-form-field>
     <mat-label>SRT Host Port</mat-label>
-    <input matInput formControlName="srtHostPort" />
+    <input matInput formControlName="srtHostPort" autocomplete="off" />
+    <mat-error
+      *ngIf="settingsForm.get('srtHostPort').hasError('pattern')">
+      SRT Host Port must be a <strong>number</strong>
+    </mat-error>
+    <mat-error
+      *ngIf="settingsForm.get('srtHostPort').hasError('required')">
+      SRT Host Port is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button class="mat-raised-button" (click)="closeDialog()">Close</button>
-  <button class="mat-raised-button mat-primary" (click)="saveSettings()">Save</button>
+  <button class="mat-raised-button"
+          (click)="closeDialog()">Close</button>
+  <button class="mat-raised-button mat-primary"
+          (click)="saveSettings()"
+          [disabled]="!settingsForm.valid">Save</button>
 </mat-dialog-actions>
