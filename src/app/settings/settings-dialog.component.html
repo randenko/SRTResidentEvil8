@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Settings</h2>
+  <mat-dialog-content [formGroup]="settingsForm">
+    <p><mat-slide-toggle formControlName="showCurrentEvent">Show Current Event</mat-slide-toggle></p>
+    <p><mat-slide-toggle formControlName="showPlayerPosition">Show Player Position</mat-slide-toggle></p>
+    <p><mat-slide-toggle formControlName="showStatistics">Show Statistics</mat-slide-toggle></p>
+    <p><mat-slide-toggle formControlName="showEnemyHPBar">Show Enemy HP Bar</mat-slide-toggle></p>
+    <p><mat-slide-toggle formControlName="showDebugging">Show Debugging</mat-slide-toggle></p>
+
+    <mat-form-field>
+      <mat-label>Polling Rate</mat-label>
+      <input matInput formControlName="pollingRate" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>SRT Host Address</mat-label>
+      <input matInput formControlName="srtHostAddress" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>SRT Host Port</mat-label>
+      <input matInput formControlName="srtHostPort" />
+    </mat-form-field>
+  </mat-dialog-content>
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary" (click)="saveSettings()">Save</button>
+</mat-dialog-actions>
