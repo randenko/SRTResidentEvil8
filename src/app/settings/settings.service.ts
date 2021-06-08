@@ -9,8 +9,8 @@ import {LocalStorageService} from "../local-storage.service";
   providedIn: 'root'
 })
 export class SettingsService {
-  private defaultSettings: Settings = new Settings(true, true, true, true,
-    true, 500, "localhost", 7190);
+  private defaultSettings: Settings = new Settings(true, false, true, true,
+    false, 500, "localhost", 7190);
   private currentSettings: Settings;
 
   settingsSubject: Subject<Settings>;
