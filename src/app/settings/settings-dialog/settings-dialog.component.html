@@ -9,6 +9,11 @@
   <mat-form-field>
     <mat-label>Polling Rate</mat-label>
     <input matInput formControlName="pollingRate" autocomplete="off" />
+    <mat-icon
+      matSuffix
+      matTooltip="This setting controls how often the ui is updated. If you are having performance issues, increase this number."
+      matTooltipPosition="left">info_outline
+    </mat-icon>
     <mat-hint>in milliseconds (one second is 1,000 milliseconds)</mat-hint>
     <mat-error
       *ngIf="settingsForm.get('pollingRate').hasError('pattern')">
