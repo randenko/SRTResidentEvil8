@@ -3,7 +3,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 
 import {Subscription} from "rxjs";
 
-import {SettingsDialogComponent} from "./settings/settings-dialog.component";
+import {SettingsDialogComponent} from "./settings/settings-dialog/settings-dialog.component";
 import {SettingsService} from "./settings/settings.service";
 import {Settings} from "./settings/settings.model";
 
@@ -13,7 +13,7 @@ import {Settings} from "./settings/settings.model";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'RE 8 Village SRT UI';
+  title: String = 'RE 8 Village SRT UI';
   currentSettings: Settings;
   settingsSubscription: Subscription;
 
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.settingsSubscription.unsubscribe();
   }
 
-  openSettingsDialog() {
+  openSettingsDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = this.currentSettings;
     dialogConfig.width = '350px';

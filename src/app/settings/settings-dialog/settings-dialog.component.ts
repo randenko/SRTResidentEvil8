@@ -2,8 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
-import {Settings} from "./settings.model";
-import {SettingsService} from "./settings.service";
+import {Settings} from "../settings.model";
+import {SettingsService} from "../settings.service";
 
 @Component({
   selector: 'app-settings',
@@ -53,7 +53,7 @@ export class SettingsDialogComponent implements OnInit {
         updateOn: 'change'
       }]
     });
-    this.settingsForm.markAllAsTouched()
+    this.settingsForm.markAllAsTouched();
   }
 
 }

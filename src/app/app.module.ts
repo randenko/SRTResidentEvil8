@@ -11,7 +11,7 @@ import {PlayerHpBarComponent} from './hp-bar/player-hp-bar/player-hp-bar.compone
 import {EnemyHpBarComponent} from './hp-bar/enemy-hp-bar/enemy-hp-bar.component';
 import {PositionComponent} from './position/position.component';
 import {StatisticsComponent} from './statistics/statistics.component';
-import {SettingsDialogComponent} from './settings/settings-dialog.component';
+import {SettingsDialogComponent} from './settings/settings-dialog/settings-dialog.component';
 import {MaterialModule} from "./material.module";
 
 @NgModule({
