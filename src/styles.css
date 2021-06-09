@@ -1,5 +1,11 @@
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .container {
   width: 100%;
@@ -24,7 +30,7 @@ font {
 
 #currenthp {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding-left: 10px;
   font-size: 24px;
@@ -45,7 +51,7 @@ font {
   top: 15px;
   font-size: 20px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 10px;
 }
 
@@ -54,7 +60,7 @@ font {
   top: 15px;
   font-size: 20px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 10px;
 }
 
@@ -63,7 +69,7 @@ font {
   top: 15px;
   font-size: 20px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 10px;
 }
 
@@ -71,7 +77,7 @@ font {
   position: relative;
   top: 15px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 10px;
 }
 
@@ -79,7 +85,7 @@ font {
   position: relative;
   top: 15px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 10px;
 }
 
@@ -94,7 +100,7 @@ font {
   position: relative;
   top: 15px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 10px;
 }
 
@@ -102,7 +108,7 @@ font {
   position: relative;
   top: 15px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 10px;
 }
 
@@ -130,7 +136,7 @@ font {
 }
 
 .danger {
-  background: rgba(153,0,0,0.6);
+  background: rgba(153, 0, 0, 0.6);
 }
 
 .dead {
@@ -146,8 +152,8 @@ font {
 
 #percenthp {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 0;
+  right: 0;
   align-items: center;
   padding-right: 10px;
   font-size: 24px;
@@ -172,8 +178,8 @@ font {
 
 #currentenemyhp {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   padding-left: 10px;
   font-size: 24px;
   line-height: 30px;
@@ -181,8 +187,8 @@ font {
 
 #percentenemyhp {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 0;
+  right: 0;
   align-items: center;
   padding-right: 10px;
   font-size: 24px;
