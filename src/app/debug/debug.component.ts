@@ -10,6 +10,7 @@ export class DebugComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("debug ngOnInit() called!")
   }
 
 }

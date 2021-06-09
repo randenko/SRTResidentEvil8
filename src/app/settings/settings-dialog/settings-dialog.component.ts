@@ -41,7 +41,7 @@ export class SettingsDialogComponent implements OnInit {
       'showEnemyHPBar': [this.currentSettings.showEnemyHPBar],
       'showDebugging': [this.currentSettings.showDebugging],
       'pollingRate': [this.currentSettings.pollingRate, {
-        validators: [Validators.required, Validators.min(250), Validators.pattern("^[0-9]*$")],
+        validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(250)],
         updateOn: 'change'
       }],
       'srtHostAddress': [this.currentSettings.srtHostAddress, {

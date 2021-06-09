@@ -8,4 +8,10 @@
       <mat-icon aria-hidden="false" aria-label="settings icon">settings</mat-icon>
     </button>
   </mat-toolbar>
+  <app-debug *ngIf="currentSettings.showDebugging"></app-debug>
+  <app-player-hp-bar></app-player-hp-bar>
+  <app-statistics *ngIf="currentSettings.showStatistics"></app-statistics>
+  <app-position *ngIf="currentSettings.showPlayerPosition"></app-position>
+  <app-event *ngIf="currentSettings.showCurrentEvent"></app-event>
+  <app-enemy-hp-bar *ngIf="currentSettings.showEnemyHPBar"></app-enemy-hp-bar>
 </div>
