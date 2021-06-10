@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 import {Settings} from "../settings.model";
-import {SettingsService} from "../settings.service";
 
 @Component({
   selector: 'app-settings',
@@ -13,8 +12,8 @@ import {SettingsService} from "../settings.service";
 export class SettingsDialogComponent implements OnInit {
   settingsForm: FormGroup;
 
-  constructor(private settingsService: SettingsService, private fb: FormBuilder,
-              private dialogRef: MatDialogRef<SettingsDialogComponent>, @Inject(MAT_DIALOG_DATA) private currentSettings: Settings) {
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<SettingsDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) private settings: Settings) {
   }
 
   ngOnInit(): void {
@@ -22,11 +21,10 @@ export class SettingsDialogComponent implements OnInit {
   }
 
   saveSettings(): void {
-    const form = this.settingsForm.value;
-    const settings = new Settings(form.showCurrentEvent, form.showPlayerPosition, form.showStatistics, form.showEnemyHPBar,
-      form.showDebugging, form.pollingRate, form.srtHostAddress, form.srtHostPort);
-    this.settingsService.setSettings(settings);
-    this.closeDialog();
+    const value = this.settingsForm.value;
+    const settings = new Settings(value.showCurrentEvent, value.showPlayerPosition, value.showStatistics, value.showEnemyHPBar,
+      value.showDebugging, value.pollingRate, value.srtHostAddress, value.srtHostPort);
+    this.dialogRef.close(settings);
   }
 
   closeDialog(): void {
@@ -35,20 +33,20 @@ export class SettingsDialogComponent implements OnInit {
 
   private initForm() {
     this.settingsForm = this.fb.group({
-      'showCurrentEvent': [this.currentSettings.showCurrentEvent],
-      'showPlayerPosition': [this.currentSettings.showPlayerPosition],
-      'showStatistics': [this.currentSettings.showStatistics],
-      'showEnemyHPBar': [this.currentSettings.showEnemyHPBar],
-      'showDebugging': [this.currentSettings.showDebugging],
-      'pollingRate': [this.currentSettings.pollingRate, {
+      'showCurrentEvent': [this.settings.showCurrentEvent],
+      'showPlayerPosition': [this.settings.showPlayerPosition],
+      'showStatistics': [this.settings.showStatistics],
+      'showEnemyHPBar': [this.settings.showEnemyHPBar],
+      'showDebugging': [this.settings.showDebugging],
+      'pollingRate': [this.settings.pollingRate, {
         validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(250)],
         updateOn: 'change'
       }],
-      'srtHostAddress': [this.currentSettings.srtHostAddress, {
+      'srtHostAddress': [this.settings.srtHostAddress, {
         validators: [Validators.required],
         updateOn: 'change'
       }],
-      'srtHostPort': [this.currentSettings.srtHostPort, {
+      'srtHostPort': [this.settings.srtHostPort, {
         validators: [Validators.required, Validators.pattern("^[0-9]*$")],
         updateOn: 'change'
       }]
