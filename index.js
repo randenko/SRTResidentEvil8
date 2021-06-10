@@ -160,7 +160,7 @@ function GetEnemies(data) {
 		}
 		else if (ShowBossOnly && item.IsAlive && item.IsBoss) {
 			mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${(item.Percentage * 100).toFixed(1)}%">
-			<div id="currentenemyhp">${item.CurrentHP}</div><div class="red" id="percentenemyhp">${(item.Percentage * 100).toFixed(1)}%</div></div></div>`;
+			<div id="currentenemyhp">${item.BossName}: ${item.CurrentHP}</div><div class="red" id="percentenemyhp">${(item.Percentage * 100).toFixed(1)}%</div></div></div>`;
 		}
 	});
 	
