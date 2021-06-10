@@ -9,6 +9,7 @@ var HidePlayerPosition = false;
 var HideStats = false;
 var HideEnemies = false;
 var HideDebug = false;
+var ShowBossOnly = false;
 
 window.onload = function () {
 	const queryString = window.location.search;
@@ -28,6 +29,10 @@ window.onload = function () {
 	const enemy = urlParams.get('enemy');
 	if (enemy != null) {
 		HideEnemies = true;
+	}
+	const bossonly = urlParams.get('bossonly');
+	if (bossonly != null) {
+		ShowBossOnly = true;
 	}
 	const debug = urlParams.get('debug');
 	if (debug != null) {
@@ -149,7 +154,11 @@ function GetEnemies(data) {
 	filterdEnemies.sort(function (a, b) {
 		return Asc(a.Percentage, b.Percentage) || Desc(a.CurrentHP, b.CurrentHP);
 	}).forEach(function (item, index, arr) {
-		if (item.IsAlive) {
+		if (!ShowBossOnly && item.IsAlive) {
+			mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${(item.Percentage * 100).toFixed(1)}%">
+			<div id="currentenemyhp">${item.CurrentHP}</div><div class="red" id="percentenemyhp">${(item.Percentage * 100).toFixed(1)}%</div></div></div>`;
+		}
+		else if (ShowBossOnly && item.IsAlive && item.IsBoss) {
 			mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${(item.Percentage * 100).toFixed(1)}%">
 			<div id="currentenemyhp">${item.CurrentHP}</div><div class="red" id="percentenemyhp">${(item.Percentage * 100).toFixed(1)}%</div></div></div>`;
 		}
@@ -236,7 +245,7 @@ function appendData(data) {
 	var mainContainer = document.getElementById("srtQueryData");
 	mainContainer.innerHTML = "";
 
-	if (data.VersionInfo == undefined || data.VersionInfo != "1.0.1.5" && data.VersionInfo != "1.0.1.6") {
+	if (data.VersionInfo == undefined || data.VersionInfo != "1.0.1.6") {
 		mainContainer.innerHTML = `<font color="#FF0000">Outdated Version Please Update</font>`;
 		return;
 	}
