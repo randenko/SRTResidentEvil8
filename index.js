@@ -93,18 +93,64 @@ function GetPlayerHP(data) {
   var hitPercent = (data.PlayerCurrentHealth / data.PlayerMaxHealth) * 100;
   var playerName = (data.PlayerStatus.IsEthan) ? "Ethan: " : (data.PlayerStatus.IsChris) ? "Chris: " : "";
   if (hitPercent > 66) {
-    mainContainer.innerHTML += `<div class="hp"><div class="hpbar fine" style="width:${hitPercent}%">
-				<div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div><div class="green" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
+    mainContainer.innerHTML += `
+        <div class="hp">
+            <div class="hpbar fine" style="width:${hitPercent}%">
+              <div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div>
+              <div class="green" id="percenthp">${hitPercent.toFixed(1)}%</div>
+				    </div>
+				</div>`;
   } else if (hitPercent <= 66 && hitPercent > 33) {
-    mainContainer.innerHTML += `<div class="hp"><div class="hpbar caution" style="width:${hitPercent}%">
-				<div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div><div class="yellow" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
+    mainContainer.innerHTML += `
+        <div class="hp">
+            <div class="hpbar caution" style="width:${hitPercent}%">
+              <div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div>
+              <div class="yellow" id="percenthp">${hitPercent.toFixed(1)}%</div>
+				    </div>
+				</div>`;
   } else if (hitPercent <= 33 && hitPercent > 0) {
-    mainContainer.innerHTML += `<div class="hp"><div class="hpbar danger" style="width:${hitPercent}%">
-				<div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div><div class="red" id="percenthp">${hitPercent.toFixed(1)}%</div></div></div>`;
+    mainContainer.innerHTML += `
+        <div class="hp">
+            <div class="hpbar danger" style="width:${hitPercent}%">
+              <div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div>
+              <div class="red" id="percenthp">${hitPercent.toFixed(1)}%</div>
+				    </div>
+				</div>`;
   } else {
-    mainContainer.innerHTML += `<div class="hp"><div class="hpbar dead" style="width:${100}%">
-				<div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div><div class="grey" id="percenthp">${0}%</div></div></div>`;
+    mainContainer.innerHTML += `
+        <div class="hp">
+            <div class="hpbar dead" style="width:${100}%">
+				        <div id="currenthp">${playerName}${data.PlayerCurrentHealth} / ${data.PlayerMaxHealth}</div>
+				        <div class="grey" id="percenthp">${0}%</div>
+				    </div>
+				</div>`;
   }
+}
+
+// TODO create enemy/enemies angular component
+function GetEnemies(data) {
+  if (HideEnemies) {
+    return;
+  }
+  let mainContainer = document.getElementById("srtQueryData");
+
+  var filterdEnemies = data.EnemyHealth.filter(m => {
+    return (m.IsAlive)
+  });
+
+  filterdEnemies.sort(function (a, b) {
+    return Asc(a.Percentage, b.Percentage) || Desc(a.CurrentHP, b.CurrentHP);
+  }).forEach(function (item, index, arr) {
+    if (item.IsAlive) {
+      mainContainer.innerHTML += `
+          <div class="enemyhp">
+              <div class="enemyhpbar danger" style="width:${(item.Percentage * 100).toFixed(1)}%">
+                <div id="currentenemyhp">${item.CurrentHP}</div>
+                <div class="red" id="percentenemyhp">${(item.Percentage * 100).toFixed(1)}%</div>
+			        </div>
+			    </div>`;
+    }
+  });
 }
 
 // TODO create DA angular component
@@ -202,26 +248,7 @@ function GetDebug(data) {
   }
 }
 
-// TODO create enemy/enemies angular component
-function GetEnemies(data) {
-  if (HideEnemies) {
-    return;
-  }
-  let mainContainer = document.getElementById("srtQueryData");
 
-  var filterdEnemies = data.EnemyHealth.filter(m => {
-    return (m.IsAlive)
-  });
-
-  filterdEnemies.sort(function (a, b) {
-    return Asc(a.Percentage, b.Percentage) || Desc(a.CurrentHP, b.CurrentHP);
-  }).forEach(function (item, index, arr) {
-    if (item.IsAlive) {
-      mainContainer.innerHTML += `<div class="enemyhp"><div class="enemyhpbar danger" style="width:${(item.Percentage * 100).toFixed(1)}%">
-			<div id="currentenemyhp">${item.CurrentHP}</div><div class="red" id="percentenemyhp">${(item.Percentage * 100).toFixed(1)}%</div></div></div>`;
-    }
-  });
-}
 
 const Asc = function (a, b) {
   if (a > b) return +1;

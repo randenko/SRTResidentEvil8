@@ -1,1 +1,6 @@
-<p>debug works!</p>
+<div id="debug">
+  <div class="title">Event Type: <span>{{gameData?.EventType}} - {{getEventType()}}</span></div>
+  <div class="title">Is Cutscene: <span>{{gameData?.IsMotionPlay}} - {{isCutscene()}}</span></div>
+  <div class="title">Menu State: <span>{{getState()}}</span></div>
+  <div class="title">Last Key Item: <span>{{gameData?.LastKeyItem.ItemName}}</span></div>
+</div>
