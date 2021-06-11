@@ -36,8 +36,14 @@ export class SrtHostService implements OnDestroy {
         const previousSettings = this.settings;
         this.settings = value;
         if (!previousSettings || previousSettings.pollingRate !== value.pollingRate) {
-          this.clearPollingInterval()
-          this.setPollingInterval();
+          this.fetchGameData().toPromise().then(gameData => {
+            this.gameDataSubject.next(gameData);
+            this.stopPollingInterval()
+            this.startPollingInterval();
+          }).catch(reason => {
+            console.log("pre fetch failed!!")
+            console.error(reason);
+          });
         }
       }
     });
@@ -47,7 +53,7 @@ export class SrtHostService implements OnDestroy {
     return this.http.get<GameData>("http://" + this.settings.srtHostAddress + ":" + this.settings.srtHostPort);
   }
 
-  private setPollingInterval(): void {
+  private startPollingInterval(): void {
     this.gameDataSubscription = interval(this.settings.pollingRate)
       .pipe(switchMap(() => {
         return this.fetchGameData().pipe(catchError(error => {
@@ -56,7 +62,7 @@ export class SrtHostService implements OnDestroy {
       })).subscribe(gameData => this.gameDataSubject.next(gameData));
   }
 
-  private clearPollingInterval(): void {
+  private stopPollingInterval(): void {
     if (this.gameDataSubscription) {
       this.gameDataSubscription.unsubscribe();
     }
