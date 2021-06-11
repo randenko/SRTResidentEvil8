@@ -38,14 +38,6 @@ font {
   width: 420px;
 }
 
-#position {
-  position: relative;
-  top: 8px;
-  font-size: 20px;
-  display: flex;
-  justify-content: space-evenly;
-}
-
 #da {
   position: relative;
   top: 15px;
