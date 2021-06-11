@@ -47,15 +47,6 @@ font {
   padding-left: 10px;
 }
 
-#chapter {
-  position: relative;
-  top: 15px;
-  font-size: 20px;
-  display: flex;
-  justify-content: flex-start;
-  padding-left: 10px;
-}
-
 #lei {
   position: relative;
   top: 15px;
