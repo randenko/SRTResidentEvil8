@@ -53,7 +53,7 @@ export class SrtHostService implements OnDestroy {
         return this.fetchGameData().pipe(catchError(error => {
           return throwError(error);
         }));
-      })).subscribe(gameDate => this.gameDataSubject.next(gameDate));
+      })).subscribe(gameData => this.gameDataSubject.next(gameData));
   }
 
   private clearPollingInterval(): void {

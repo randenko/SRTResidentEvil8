@@ -18,8 +18,8 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.gameDataSubscription = this.srtHostService.getGameData().subscribe(gameDate => {
-      this.gameData = gameDate;
+    this.gameDataSubscription = this.srtHostService.getGameData().subscribe(gameData => {
+      this.gameData = gameData;
     })
   }
 
