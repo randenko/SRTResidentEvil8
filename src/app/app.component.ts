@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {MatSnackBar, MatSnackBarRef, TextOnlySnackBar} from "@angular/material/snack-bar";
 
 import {Subscription} from "rxjs";
 
@@ -17,26 +18,52 @@ export class AppComponent implements OnInit, OnDestroy {
   title: String = 'RE 8 Village SRT UI';
   settings: Settings;
   private settingsSubscription: Subscription;
+  private connectionStatusSubscription: Subscription;
+  private snackBarConnectionSuccessRef: MatSnackBarRef<TextOnlySnackBar>;
+  private snackBarConnectionErrorRef: MatSnackBarRef<TextOnlySnackBar>;
 
-  constructor(private dialog: MatDialog, private settingsService: SettingsService, private srtHostService: SrtHostService) {
+  constructor(private _dialog: MatDialog, private _snackBar: MatSnackBar, private _settingsService: SettingsService,
+              private _srtHostService: SrtHostService) {
   }
 
   ngOnInit(): void {
-    this.settingsSubscription = this.settingsService.getSettings().subscribe({
-      next: value => this.settings = value
+    this.settingsSubscription = this._settingsService.getSettings().subscribe(value => this.settings = value);
+    this.connectionStatusSubscription = this._srtHostService.getConnectionStatus().subscribe(value => {
+      if (value.isConnectionSuccess && !this.snackBarConnectionSuccessRef) {
+        this.snackBarConnectionSuccessRef = this._snackBar.open('Connection established!', "Dismiss", {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+        this.snackBarConnectionSuccessRef.afterDismissed().subscribe(() => this.snackBarConnectionSuccessRef = undefined);
+      }
+
+      if (value.isConnectionError && !this.snackBarConnectionErrorRef) {
+        this.snackBarConnectionErrorRef = this._snackBar.open('Connection could not be established!', 'Reload', {
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+        this.snackBarConnectionErrorRef.onAction().subscribe(() => window.location.reload());
+      }
+
+      if (!value.isConnectionError && this.snackBarConnectionErrorRef) {
+        this.snackBarConnectionErrorRef.dismiss();
+        this.snackBarConnectionErrorRef = undefined;
+      }
     });
   }
 
   ngOnDestroy(): void {
     this.settingsSubscription.unsubscribe();
+    this.connectionStatusSubscription.unsubscribe();
   }
 
   openSettingsDialog(): void {
     const dialogConfig = this.setupDialogConfig();
-    const dialogRef = this.dialog.open(SettingsDialogComponent, dialogConfig);
+    const dialogRef = this._dialog.open(SettingsDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((newSettings: Settings) => {
       if (newSettings) {
-        this.settingsService.setSettings(newSettings);
+        this._settingsService.setSettings(newSettings);
       }
     });
   }
