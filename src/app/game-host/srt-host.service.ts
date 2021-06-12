@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 import {BehaviorSubject, interval, Observable, ReplaySubject, Subject, Subscription} from "rxjs";
-import {mergeMap} from 'rxjs/operators';
+import {map, mergeMap} from 'rxjs/operators';
 
 import {SettingsService} from "../settings/settings.service";
 import {Settings} from "../settings/settings.model";
@@ -75,7 +75,11 @@ export class SrtHostService implements OnDestroy {
   }
 
   private fetchGameData(): Observable<GameData> {
-    return this.http.get<GameData>("http://" + this.settings.srtHostAddress + ":" + this.settings.srtHostPort);
+    return this.http.get<GameData>("http://" + this.settings.srtHostAddress + ":" + this.settings.srtHostPort)
+      .pipe(map(results => {
+        results.EnemyHealth = results.EnemyHealth.filter(r => r.IsAlive);
+        return results;
+      }));
   }
 
   private startPollingInterval(): void {
