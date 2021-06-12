@@ -1,14 +1,24 @@
 <h2 mat-dialog-title>Settings</h2>
 <mat-dialog-content [formGroup]="settingsForm">
-  <p><mat-slide-toggle formControlName="showCurrentEvent">Show Current Event</mat-slide-toggle></p>
-  <p><mat-slide-toggle formControlName="showPlayerPosition">Show Player Position</mat-slide-toggle></p>
-  <p><mat-slide-toggle formControlName="showStatistics">Show Statistics</mat-slide-toggle></p>
-  <p><mat-slide-toggle formControlName="showEnemyHPBar">Show Enemy HP Bar</mat-slide-toggle></p>
-  <p><mat-slide-toggle formControlName="showDebugging">Show Debugging</mat-slide-toggle></p>
+  <p>
+    <mat-slide-toggle formControlName="showCurrentEvent">Show Current Event</mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle formControlName="showPlayerPosition">Show Player Position</mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle formControlName="showStatistics">Show Statistics</mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle formControlName="showEnemyHPBar">Show Enemy HP Bar</mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle formControlName="showDebugging">Show Debugging</mat-slide-toggle>
+  </p>
   <br>
   <mat-form-field>
     <mat-label>Polling Rate</mat-label>
-    <input matInput formControlName="pollingRate" autocomplete="off" />
+    <input autocomplete="off" formControlName="pollingRate" matInput/>
     <mat-icon
       matSuffix
       matTooltip="This setting controls how often the ui is updated. If you are having performance issues, increase this number."
@@ -31,7 +41,7 @@
   <br>
   <mat-form-field>
     <mat-label>SRT Host Address</mat-label>
-    <input matInput formControlName="srtHostAddress" autocomplete="off" />
+    <input autocomplete="off" formControlName="srtHostAddress" matInput/>
     <mat-hint>ip address or domain name</mat-hint>
     <mat-error
       *ngIf="settingsForm.get('srtHostAddress').hasError('required')">
@@ -41,7 +51,7 @@
   <br>
   <mat-form-field>
     <mat-label>SRT Host Port</mat-label>
-    <input matInput formControlName="srtHostPort" autocomplete="off" />
+    <input autocomplete="off" formControlName="srtHostPort" matInput/>
     <mat-error
       *ngIf="settingsForm.get('srtHostPort').hasError('pattern')">
       SRT Host Port must be a <strong>number</strong>
@@ -53,9 +63,11 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button
-          (click)="closeDialog()">Close</button>
-  <button mat-raised-button color="primary"
-          (click)="saveSettings()"
-          [disabled]="!settingsForm.valid">Save</button>
+  <button (click)="closeDialog()"
+          mat-raised-button>Close
+  </button>
+  <button (click)="saveSettings()" [disabled]="!settingsForm.valid"
+          color="primary"
+          mat-raised-button>Save
+  </button>
 </mat-dialog-actions>

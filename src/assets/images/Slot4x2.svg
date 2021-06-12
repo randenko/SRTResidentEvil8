@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="128" viewBox="0 0 256 128">
+<svg height="128" viewBox="0 0 256 128" width="256" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <clipPath id="clip-Slot4x2">
-      <rect width="256" height="128"/>
+      <rect height="128" width="256"/>
     </clipPath>
   </defs>
-  <g id="Slot4x2" clip-path="url(#clip-Slot4x2)">
-    <rect width="256" height="128" fill="#fff"/>
-    <g id="Rectangle_70" data-name="Rectangle 70" fill="#121213" stroke="#aeaeae" stroke-width="1">
-      <rect width="256" height="128" stroke="none"/>
-      <rect x="0.5" y="0.5" width="255" height="127" fill="none"/>
+  <g clip-path="url(#clip-Slot4x2)" id="Slot4x2">
+    <rect fill="#fff" height="128" width="256"/>
+    <g data-name="Rectangle 70" fill="#121213" id="Rectangle_70" stroke="#aeaeae" stroke-width="1">
+      <rect height="128" stroke="none" width="256"/>
+      <rect fill="none" height="127" width="255" x="0.5" y="0.5"/>
     </g>
   </g>
 </svg>
