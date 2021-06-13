@@ -14,6 +14,7 @@ import {PositionComponent} from './position/position.component';
 import {StatisticsComponent} from './statistics/statistics.component';
 import {SettingsDialogComponent} from './settings/settings-dialog/settings-dialog.component';
 import {MaterialModule} from "./material.module";
+import {ENVIRONMENT_SPECIFIC_PROVIDERS} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import {MaterialModule} from "./material.module";
     HttpClientModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    ENVIRONMENT_SPECIFIC_PROVIDERS
+  ],
   bootstrap: [AppComponent],
   entryComponents: [SettingsDialogComponent]
 })
