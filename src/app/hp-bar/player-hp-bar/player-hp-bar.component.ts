@@ -46,10 +46,10 @@ export class PlayerHpBarComponent implements OnInit, OnDestroy {
   }
 
   getHeathBarPercentage(): number {
-    return (this.gameData.PlayerCurrentHealth / this.gameData.PlayerMaxHealth) * 100;
+    return (this.gameData.PlayerCurrentHealth / this.gameData.PlayerMaxHealth) * 100 || 0;
   }
 
-  getHeathBarWidth() {
+  getHeathBarWidth(): { width: string } {
     return {width: this.getHeathBarPercentage() + "%"};
   }
 }

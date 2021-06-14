@@ -164,6 +164,18 @@ function GetEnemies(data) {
 			    </div>`;
     }
   });
+
+  const Asc = function (a, b) {
+    if (a > b) return +1;
+    if (a < b) return -1;
+    return 0;
+  };
+
+  const Desc = function (a, b) {
+    if (a > b) return -1;
+    if (a < b) return +1;
+    return 0;
+  };
 }
 
 // TODO create DA angular component
@@ -262,14 +274,4 @@ function GetDebug(data) {
 }
 
 
-const Asc = function (a, b) {
-  if (a > b) return +1;
-  if (a < b) return -1;
-  return 0;
-};
 
-const Desc = function (a, b) {
-  if (a > b) return -1;
-  if (a < b) return +1;
-  return 0;
-};

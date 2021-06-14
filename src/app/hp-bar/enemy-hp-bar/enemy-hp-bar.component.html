@@ -1,1 +1,6 @@
-<p>enemy-hp-bar works!</p>
+<div class="enemyhp" *ngFor="let enemy of enemies">
+  <div class="enemyhpbar danger" [ngStyle]="getHeathBarWidth(enemy)">
+    <div id="currentenemyhp">{{enemy.CurrentHP}}</div>
+    <div class="red" id="percentenemyhp">{{getHeathBarPercentage(enemy)}}%</div>
+  </div>
+</div>
