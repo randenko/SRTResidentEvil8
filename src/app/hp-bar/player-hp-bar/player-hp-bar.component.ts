@@ -29,7 +29,7 @@ export class PlayerHpBarComponent implements OnInit, OnDestroy {
   }
 
   getPlayerName(): string {
-    return this.gameData?.PlayerStatus.IsEthan ? "Ethan: " : this.gameData?.PlayerStatus.IsChris ? "Chris: " : "";
+    return this.gameData.PlayerStatus.IsEthan ? "Ethan: " : this.gameData.PlayerStatus.IsChris ? "Chris: " : "";
   }
 
   getHealthStatus(): string {
@@ -46,7 +46,7 @@ export class PlayerHpBarComponent implements OnInit, OnDestroy {
   }
 
   getHeathBarPercentage(): number {
-    return (this.gameData?.PlayerCurrentHealth / this.gameData?.PlayerMaxHealth) * 100;
+    return (this.gameData.PlayerCurrentHealth / this.gameData.PlayerMaxHealth) * 100;
   }
 
   getHeathBarWidth() {
