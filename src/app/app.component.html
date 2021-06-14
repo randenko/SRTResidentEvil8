@@ -8,10 +8,13 @@
       <mat-icon aria-hidden="false" aria-label="settings icon">settings</mat-icon>
     </button>
   </mat-toolbar>
-  <app-debug *ngIf="settings.showDebugging"></app-debug>
-  <app-player-hp-bar></app-player-hp-bar>
-  <app-statistics *ngIf="settings.showStatistics"></app-statistics>
-  <app-position *ngIf="settings.showPlayerPosition"></app-position>
-  <app-event *ngIf="settings.showCurrentEvent"></app-event>
-  <app-enemy-hp-bar *ngIf="settings.showEnemyHPBar"></app-enemy-hp-bar>
+
+  <div class="components" *ngIf="connectionStatus.isConnectionSuccess">
+    <app-position *ngIf="settings.showPlayerPosition"></app-position>
+    <app-player-hp-bar></app-player-hp-bar>
+    <app-statistics *ngIf="settings.showStatistics"></app-statistics>
+    <app-event *ngIf="settings.showCurrentEvent"></app-event>
+    <app-debug *ngIf="settings.showDebugging"></app-debug>
+    <app-enemy-hp-bar *ngIf="settings.showEnemyHPBar"></app-enemy-hp-bar>
+  </div>
 </div>

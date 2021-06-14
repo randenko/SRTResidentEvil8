@@ -8,6 +8,7 @@ import {SettingsDialogComponent} from "./settings/settings-dialog/settings-dialo
 import {SettingsService} from "./settings/settings.service";
 import {Settings} from "./settings/settings.model";
 import {SrtHostService} from "./game-host/srt-host.service";
+import {ConnectionStatus} from "./game-host/game-model/connection-status-model";
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import {SrtHostService} from "./game-host/srt-host.service";
 export class AppComponent implements OnInit, OnDestroy {
   title: String = 'RE 8 Village SRT UI';
   settings: Settings;
+  connectionStatus: ConnectionStatus;
   private settingsSubscription: Subscription;
   private connectionStatusSubscription: Subscription;
   private snackBarConnectionSuccessRef: MatSnackBarRef<TextOnlySnackBar>;
@@ -29,7 +31,8 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.settingsSubscription = this._settingsService.getSettings().subscribe(value => this.settings = value);
     this.connectionStatusSubscription = this._srtHostService.getConnectionStatus().subscribe(value => {
-      if (value.isConnectionSuccess && !this.snackBarConnectionSuccessRef) {
+      this.connectionStatus = value;
+      if (this.connectionStatus.isConnectionSuccess && !this.snackBarConnectionSuccessRef) {
         this.snackBarConnectionSuccessRef = this._snackBar.open('Connection established!', "Dismiss", {
           duration: 5000,
           horizontalPosition: 'center',
@@ -38,7 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.snackBarConnectionSuccessRef.afterDismissed().subscribe(() => this.snackBarConnectionSuccessRef = undefined);
       }
 
-      if (value.isConnectionError && !this.snackBarConnectionErrorRef) {
+      if (this.connectionStatus.isConnectionError && !this.snackBarConnectionErrorRef) {
         this.snackBarConnectionErrorRef = this._snackBar.open('Connection could not be established!', 'Reload', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
@@ -46,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.snackBarConnectionErrorRef.onAction().subscribe(() => window.location.reload());
       }
 
-      if (!value.isConnectionError && this.snackBarConnectionErrorRef) {
+      if (!this.connectionStatus.isConnectionError && this.snackBarConnectionErrorRef) {
         this.snackBarConnectionErrorRef.dismiss();
         this.snackBarConnectionErrorRef = undefined;
       }

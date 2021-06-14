@@ -1,0 +1,61 @@
+.health-bar {
+  position: relative;
+  top: 10px;
+  left: -1px;
+  background: rgba(34, 26, 26, 0.6);
+  width: calc(100% - 8px);
+  border: rgba(60, 60, 60, 1) solid 2px;
+  height: 30px;
+}
+
+.health-status {
+  height: 30px;
+  transition: width .5s linear;
+}
+
+.current-hp {
+  padding-left: 10px;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.health-percent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 10px;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.health-bar .fine .health-percent {
+  color: rgb(0, 255, 0);
+}
+
+.health-bar .caution .health-percent {
+  color: rgb(255, 255, 0);
+}
+
+.health-bar .danger .health-percent {
+  color: rgb(255, 0, 0);
+}
+
+.health-bar .dead .health-percent {
+  color: rgb(128, 128, 128);
+}
+
+.fine {
+  background: rgba(0, 102, 0, 0.6);
+}
+
+.caution {
+  background: rgba(218, 165, 32, 0.6);
+}
+
+.danger {
+  background: rgba(153, 0, 0, 0.6);
+}
+
+.dead {
+  background: transparent;
+}

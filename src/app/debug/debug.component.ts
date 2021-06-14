@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {Subscription} from "rxjs";
 
@@ -10,7 +10,7 @@ import {SrtHostService} from "../game-host/srt-host.service";
   templateUrl: './debug.component.html',
   styleUrls: ['./debug.component.css']
 })
-export class DebugComponent implements OnInit {
+export class DebugComponent implements OnInit, OnDestroy {
   gameData: GameData;
   private gameDataSubscription: Subscription;
 
@@ -20,7 +20,7 @@ export class DebugComponent implements OnInit {
   ngOnInit(): void {
     this.gameDataSubscription = this.srtHostService.getGameData().subscribe(gameData => {
       this.gameData = gameData;
-    })
+    });
   }
 
   ngOnDestroy(): void {
@@ -44,7 +44,7 @@ export class DebugComponent implements OnInit {
     return this.gameData?.IsMotionPlay > 0;
   }
 
-  getState(): string {
+  getGameState(): string {
     if (this.gameData?.PlayerStatus.IsInShop) {
       return "Shop";
     } else if (this.gameData?.PlayerStatus.IsInInventoryMenu) {

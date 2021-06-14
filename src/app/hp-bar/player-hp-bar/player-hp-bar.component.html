@@ -1,1 +1,6 @@
-<p>player-hp-bar works!</p>
+<div class="health-bar">
+  <div class="health-status" [ngClass]="getHealthStatus()" [ngStyle]="getHeathBarWidth()">
+    <div class="current-hp">{{getPlayerName()}}{{gameData.PlayerCurrentHealth}} / {{gameData.PlayerMaxHealth}}</div>
+    <div class="health-percent">{{getHeathBarPercentage()}}%</div>
+  </div>
+</div>

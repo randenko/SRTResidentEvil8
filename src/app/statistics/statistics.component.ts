@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {Subscription} from "rxjs";
 
@@ -10,7 +10,7 @@ import {SrtHostService} from "../game-host/srt-host.service";
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.css']
 })
-export class StatisticsComponent implements OnInit {
+export class StatisticsComponent implements OnInit, OnDestroy {
   gameData: GameData;
   private gameDataSubscription: Subscription;
 
