@@ -33,7 +33,7 @@ export class PlayerHpBarComponent implements OnInit, OnDestroy {
   }
 
   getHealthStatus(): string {
-    const hitPointPercent = this.getHeathBarPercentage();
+    const hitPointPercent = this.getHeathPercentage();
     if (hitPointPercent >= 66) {
       return "fine";
     } else if (hitPointPercent < 66 && hitPointPercent >= 33) {
@@ -45,11 +45,11 @@ export class PlayerHpBarComponent implements OnInit, OnDestroy {
     }
   }
 
-  getHeathBarPercentage(): number {
+  getHeathPercentage(): number {
     return (this.gameData.PlayerCurrentHealth / this.gameData.PlayerMaxHealth) * 100 || 0;
   }
 
   getHeathBarWidth(): { width: string } {
-    return {width: this.getHeathBarPercentage() + "%"};
+    return {width: this.getHeathPercentage() + "%"};
   }
 }

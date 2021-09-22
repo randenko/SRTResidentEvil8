@@ -1,8 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
 import {Subscription} from "rxjs";
+
 import {SrtHostService} from "../../game-host/srt-host.service";
 import {EnemyHealth} from "../../game-host/game-model/enemy-health";
+import {Settings} from "../../settings/settings.model";
 
 @Component({
   selector: 'app-enemy-hp-bar',
@@ -10,6 +12,7 @@ import {EnemyHealth} from "../../game-host/game-model/enemy-health";
   styleUrls: ['./enemy-hp-bar.component.css']
 })
 export class EnemyHpBarComponent implements OnInit, OnDestroy {
+  @Input() settings: Settings;
   enemies: EnemyHealth[];
   private gameDataSubscription: Subscription;
 
@@ -27,16 +30,16 @@ export class EnemyHpBarComponent implements OnInit, OnDestroy {
     this.gameDataSubscription.unsubscribe();
   }
 
-  getHeathBarPercentage(enemy: EnemyHealth): number {
+  getHeathPercentage(enemy: EnemyHealth): number {
     return (enemy.CurrentHP / enemy.MaximumHP) * 100 || 0;
   }
 
   getHeathBarWidth(enemy: EnemyHealth): { width: string } {
-    return {width: this.getHeathBarPercentage(enemy) + "%"};
+    return {width: this.getHeathPercentage(enemy) + "%"};
   }
 
   private sortEnemies = (a: EnemyHealth, b: EnemyHealth): number => {
-    return this.asc(this.getHeathBarPercentage(a), this.getHeathBarPercentage(b)) || this.desc(a.CurrentHP, b.CurrentHP);
+    return this.asc(this.getHeathPercentage(a), this.getHeathPercentage(b)) || this.desc(a.CurrentHP, b.CurrentHP);
   }
 
   private asc = (a: number, b: number): number => {

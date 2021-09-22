@@ -1,6 +1,18 @@
-<div id="debug">
-  <div class="title">Event Type: <span>{{gameData?.EventType}} - {{getEventType()}}</span></div>
-  <div class="title">Is Cutscene: <span>{{gameData?.IsMotionPlay}} - {{isCutscene()}}</span></div>
-  <div class="title">Menu State: <span>{{getGameState()}}</span></div>
-  <div class="title">Last Key Item: <span>{{gameData?.LastKeyItem.ItemName}}</span></div>
+<div id="debug-container">
+  <div class="debug">
+    <span class="title">Event Type:</span>
+    <span class="green">{{gameData.EventType}} - {{getEventType()}}</span>
+  </div>
+  <div class="debug">
+    <span class="title">Is Cutscene:</span>
+    <span class="green">{{gameData.IsMotionPlay}} - {{isCutscene()}}</span>
+  </div>
+  <div class="debug">
+    <span class="title">Menu State:</span>
+    <span class="green">{{getGameState()}}</span>
+  </div>
+  <div class="debug">
+    <span class="title">Last Key Item:</span>
+    <span class="green">{{gameData.LastKeyItem.ItemName}}</span>
+  </div>
 </div>

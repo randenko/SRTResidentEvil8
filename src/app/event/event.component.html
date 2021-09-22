@@ -1,3 +1,4 @@
 <div id="chapter">
-  <div class="title">Current Event: <span>{{gameData?.CurrentEvent}}</span></div>
+  <span class="title">Current Event:</span>
+  <span [ngClass]="gameData.CurrentEvent === '' ? 'red' : 'green'">{{gameData.CurrentEvent || "None"}}</span>
 </div>

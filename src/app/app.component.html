@@ -15,6 +15,6 @@
     <app-statistics *ngIf="settings.showStatistics"></app-statistics>
     <app-event *ngIf="settings.showCurrentEvent"></app-event>
     <app-debug *ngIf="settings.showDebugging"></app-debug>
-    <app-enemy-hp-bar *ngIf="settings.showEnemyHPBar"></app-enemy-hp-bar>
+    <app-enemy-hp-bar [settings]=settings *ngIf="settings.showEnemyHPBar"></app-enemy-hp-bar>
   </div>
 </div>
